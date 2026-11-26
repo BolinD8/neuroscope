@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>NeuroScope · The neuroscience museum</title>
+<meta name="description" content="Explore a student-led digital neuroscience museum through original anatomical exhibits, interactive experiments, games and printable activities.">
+<link rel="icon" href="mark.svg">
+<link rel="stylesheet" href="museum.css">
+<script src="museum.js" defer>
+</script>
+</head>
+<body>
+<svg class="symbol-store" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+<symbol id="i-brain" viewBox="0 0 24 24">
+<path d="M12 6c-1-4-6-3-6 1-4 0-5 5-2 7-2 3 1 7 4 6 1 3 4 2 4-1V6Zm0 0c1-4 6-3 6 1 4 0 5 5 2 7 2 3-1 7-4 6-1 3-4 2-4-1V6ZM6 7c0 2 1 3 3 3m-5 4c1-1 3-1 4 0m10-7c0 2-1 3-3 3m5 4c-1-1-3-1-4 0"/>
+</symbol>
+<symbol id="i-flask" viewBox="0 0 24 24">
+<path d="M9 3h6m-5 0v6l-6 10a1.5 1.5 0 0 0 1.4 2h13.2a1.5 1.5 0 0 0 1.4-2L14 9V3M7.8 15h8.4"/>
+</symbol>
+<symbol id="i-grid" viewBox="0 0 24 24">
+<path d="M3.5 3.5h7v7h-7zM14 3.5h6.5v7H14zM3.5 14h7v6.5h-7zM14 14h6.5v6.5H14z"/>
+</symbol>
+<symbol id="i-play" viewBox="0 0 24 24">
+<path d="M8 4.5 19 12 8 19.5Z"/>
+</symbol>
+<symbol id="i-book" viewBox="0 0 24 24">
+<path d="M3 5q5-2 9 1 4-3 9-1v14q-5-2-9 1-4-3-9-1ZM12 6v14"/>
+</symbol>
+<symbol id="i-prev" viewBox="0 0 24 24">
+<path d="m14 6-6 6 6 6"/>
+</symbol>
+<symbol id="i-next" viewBox="0 0 24 24">
+<path d="m10 6 6 6-6 6"/>
+</symbol>
+<symbol id="i-menu" viewBox="0 0 24 24">
+<path d="M3 6h18M3 12h18M3 18h18"/>
+</symbol>
+<symbol id="i-close" viewBox="0 0 24 24">
+<path d="m5 5 14 14M19 5 5 19"/>
+</symbol>
+<symbol id="i-pulse" viewBox="0 0 24 24">
+<path d="M2 12h5l3-8 4 16 3-8h5"/>
+</symbol>
+<symbol id="i-eye" viewBox="0 0 24 24">
+<path d="M2 12q10-16 20 0-10 16-20 0Zm13 0a3 3 0 1 1-6 0 3 3 0 1 1 6 0Z"/>
+</symbol>
+<symbol id="i-spark" viewBox="0 0 24 24">
+<path d="m12 2 2.3 7.7L22 12l-7.7 2.3L12 22l-2.3-7.7L2 12l7.7-2.3Z"/>
+</symbol>
+<symbol id="i-nodes" viewBox="0 0 24 24">
+<path d="M7 12l9-6M7 12l9 6M8 12a3 3 0 1 0-6 0 3 3 0 1 0 6 0Zm12-7a3 3 0 1 0-6 0 3 3 0 1 0 6 0Zm0 14a3 3 0 1 0-6 0 3 3 0 1 0 6 0Z"/>
+</symbol>
+<symbol id="i-paper" viewBox="0 0 24 24">
+<path d="M5 3h10l4 4v14H5ZM14 3v6h5M8 13h8M8 17h6"/>
+</symbol>
+<symbol id="i-print" viewBox="0 0 24 24">
+<path d="M7 8V3h10v5M7 17H4V9h16v8h-3M7 14h10v7H7ZM16 11h1"/>
+</symbol>
+<symbol id="i-heart" viewBox="0 0 24 24">
+<path d="M12 20C7 16 2 12 2 8a5 5 0 0 1 10-1A5 5 0 0 1 22 8c0 4-5 8-10 12Z"/>
+</symbol>
+<symbol id="i-restart" viewBox="0 0 24 24">
+<path d="M3 10a9 9 0 1 1 1 7M3 4v6h6"/>
+</symbol>
+<symbol id="i-layers" viewBox="0 0 24 24">
+<path d="m12 3 10 5-10 5L2 8ZM2 12l10 5 10-5M2 16l10 5 10-5"/>
+</symbol>
+<symbol id="i-check" viewBox="0 0 24 24">
+<path d="m3 12 6 6L21 6"/>
+</symbol>
+<symbol id="i-compass" viewBox="0 0 24 24">
+<path d="M21 12a9 9 0 1 1-18 0 9 9 0 1 1 18 0Zm-5-4-3 5-5 3 3-5Z"/>
+</symbol>
+<symbol id="i-game" viewBox="0 0 24 24">
+<path d="M6 7h12q2 0 3 4l1 6q-1 4-4 1l-3-3H9l-3 3q-3 3-4-1l1-6q1-4 3-4ZM5 11h5M7.5 8.5v5M16 10h.2M19 12h.2"/>
+</symbol>
+<symbol id="i-info" viewBox="0 0 24 24">
+<path d="M21 12a9 9 0 1 1-18 0 9 9 0 1 1 18 0ZM12 11v6m0-10v.5"/>
+</symbol>
+<symbol id="i-bookmark" viewBox="0 0 24 24">
+<path d="M6 3h12v18l-6-4-6 4Z"/>
+</symbol>
+</svg>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="bar">
+<a class="brand" href="#home" aria-label="NeuroScope home">
+<span class="brand-mark">
+<svg class="icon" aria-hidden="true">
+<use href="#i-brain">
+</use>
+</svg>
+</span>NeuroScope</a>
+<nav id="mainNav" aria-label="Museum navigation">
+<a href="#collection">Exhibits</a>
+<a href="#conditions">Conditions</a>
+<a href="#community">Community</a>
+<a href="#studio">Maker Studio</a>
+<a href="#about">About</a>
+</nav>
+<div class="header-actions">
+<a class="button " href="#lab">
+<svg class="icon" aria-hidden="true">
+<use href="#i-flask">
+</use>
+</svg>Interactive lab</a>
+<button class="menu-button" aria-expanded="false" aria-controls="mainNav" aria-label="Open navigation">
+<svg class="icon" aria-hidden="true">
+<use href="#i-menu">
+</use>
+</svg>
+</button>
+</div>
+</div>
+</header>
+<main id="main" tabindex="-1">
+<section class="view" id="home">
+<section class="hero" aria-labelledby="hero-title">
+<div class="hero-field" aria-hidden="true">
+</div>
+<div class="hero-copy">
+<div class="hero-kicker">
+<span>
+</span> A DIGITAL NEUROSCIENCE MUSEUM</div>
+<h1 id="hero-title">The world inside<br>
+<em>your head.</em>
+</h1>
+<p>Discover the brain through interactive exhibits, hands-on experiments, and stories of human connection.</p>
+<div class="hero-buttons">
+<a class="button " href="#collection">
+<svg class="icon" aria-hidden="true">
+<use href="#i-grid">
+</use>
+</svg>Explore exhibits</a>
+<a class="button secondary" href="#brainshift">
+<svg class="icon" aria-hidden="true">
+<use href="#i-play">
+</use>
+</svg>Try an activity</a>
+</div>
+</div>
+<figure class="showcase" aria-label="Specimen viewer">
+<div class="orbit o1">
+</div>
+<div class="orbit o2">
+</div>
+<div class="orbit o3">
+</div>
+<div class="stage-rule" aria-hidden="true">
+</div>
+<span class="stage-cross c1">+</span>
+<span class="stage-cross c2">+</span>
+<img id="showImage" src="hero-brain.webp" fetchpriority="high" alt="Lavender sculptural illustration of a human brain in lateral view">
+<a href="#atlas" class="landmark frontal-label" data-open-region="0">Frontal lobe<span aria-hidden="true"></span></a>
+<a href="#atlas" class="landmark cerebellum-label" data-open-region="4"><span aria-hidden="true"></span>Cerebellum</a>
+<figcaption>
+<span class="caption-line">
+</span>
+<span id="specLabel" aria-live="polite">Human brain <small>/ Lateral view</small>
+</span>
+</figcaption>
+</figure>
+<div class="slide-controls">
+<button type="button" id="slidePrev" aria-label="Previous specimen">
+<svg class="icon" aria-hidden="true">
+<use href="#i-prev">
+</use>
+</svg>
+</button>
+<span id="slideCount">01 <b>/</b> 03</span>
+<button type="button" id="slideNext" aria-label="Next specimen">
+<svg class="icon" aria-hidden="true">
+<use href="#i-next">
+</use>
+</svg>
+</button>
+</div>
+</section>
+<section id="collection" aria-labelledby="collectionTitle">
+<div class="collection-head">
+<div>
+<div class="eyebrow">
+<i>
+</i>Museum collection</div>
+<h2 id="collectionTitle">Explore the exhibits<span>.</span>
+</h2>
+</div>
+<div class="filters" aria-label="Filter exhibits">
+<button type="button" data-filter="All exhibits" aria-pressed="true">
+<svg class="icon" aria-hidden="true">
+<use href="#i-grid">
+</use>
+</svg>All exhibits</button>
+<button type="button" data-filter="Anatomy" aria-pressed="false">Anatomy</button>
+<button type="button" data-filter="Activities" aria-pressed="false">Activities</button>
+<button type="button" data-filter="Health" aria-pressed="false">Health</button>
+</div>
+</div>
+<div class="exhibit-grid">
+<a class="exhibit atlas-card" data-category="Anatomy" href="#atlas">
+<div class="plate">
+<div class="plate-target" aria-hidden="true">
+</div>
+<img src="coronal.webp" alt="" class="card-specimen" loading="lazy" decoding="async">
+<span class="plate-label">CORONAL SECTION</span>
+</div>
+<div class="card-body">
+<span class="micro">
+<svg class="icon" aria-hidden="true">
+<use href="#i-brain">
+</use>
+</svg>Interactive atlas</span>
+<h3>The Brain Atlas</h3>
+<p>Locate five brain regions and discover how they work together.</p>
+</div>
+</a>
+<a class="exhibit signals-card" data-category="Anatomy" href="#signals">
+<div class="plate">
+<div class="plate-target" aria-hidden="true">
+</div>
+<img src="neuron.webp" alt="" class="card-specimen" loading="lazy" decoding="async">
+<span class="plate-label">MULTIPOLAR NEURON</span>
+</div>
+<div class="card-body">
+<span class="micro">
+<svg class="icon" aria-hidden="true">
+<use href="#i-pulse">
+</use>
+</svg>Signal simulator</span>
+<h3>The Signal Lab</h3>
+<p>Balance excitation and inhibition, then follow the impulse down an axon.</p>
+</div>
+</a>
+<a class="exhibit brainshift-card" data-category="Activities" href="#brainshift">
+<div class="plate">
+<div class="plate-target" aria-hidden="true">
+</div>
+<img src="creature.webp" alt="" class="card-specimen" loading="lazy" decoding="async">
+<span class="plate-label">WINGED SPECIMEN</span>
+</div>
+<div class="card-body">
+<span class="micro">
+<svg class="icon" aria-hidden="true">
+<use href="#i-game">
+</use>
+</svg>Learning game</span>
+<h3>BrainShift</h3>
+<p>Meet a cast of creatures and switch the rule you use to sort them.</p>
+</div>
+</a>
+<a class="exhibit conditions-card" data-category="Health" href="#conditions">
+<div class="plate">
+<div class="plate-target" aria-hidden="true">
+</div>
+<img src="hero-brain.webp" alt="" class="card-specimen" loading="lazy" decoding="async">
+<span class="plate-label">LATERAL VIEW</span>
+</div>
+<div class="card-body">
+<span class="micro">
+<svg class="icon" aria-hidden="true">
+<use href="#i-book">
+</use>
+</svg>Field guide</span>
+<h3>Understanding Conditions</h3>
+<p>Explore epilepsy, ADHD, and stroke through short, sourced lessons.</p>
+</div>
+</a>
+<a class="exhibit community-card" data-category="Activities" href="#community">
+<div class="plate">
+<div class="plate-target" aria-hidden="true">
+</div>
+<canvas class="net-preview" width="864" height="630" aria-hidden="true">
+</canvas>
+<span class="plate-label">SYMBOLIC NETWORK</span>
+</div>
+<div class="card-body">
+<span class="micro">
+<svg class="icon" aria-hidden="true">
+<use href="#i-nodes">
+</use>
+</svg>Community artwork</span>
+<h3>The Connected Brain</h3>
+<p>Build a constellation of neurons, one message of kindness at a time.</p>
+</div>
+</a>
+<a class="exhibit studio-card" data-category="Activities" href="#studio">
+<div class="plate">
+<div class="plate-target" aria-hidden="true">
+</div>
+<div class="paper-preview" aria-hidden="true">
+<span>NEUROSCOPE / MAKER STUDIO</span>
+<b>Make a neuron</b>
+<canvas class="craft-preview" width="440" height="180">
+</canvas>
+</div>
+<span class="plate-label">WORKSHEET DETAIL</span>
+</div>
+<div class="card-body">
+<span class="micro">
+<svg class="icon" aria-hidden="true">
+<use href="#i-paper">
+</use>
+</svg>Printable workshop</span>
+<h3>Paper Neurons</h3>
+<p>Make a paper neuron and trace the journey of a signal by hand.</p>
+</div>
+</a>
+</div>
+<p class="sr" id="filterStatus" aria-live="polite">
+</p>
+</section>
+</section>
+<section class="view subpage" id="atlas" hidden>
+<div class="crumb">
+<a href="#collection">Exhibits</a>
+<svg class="icon" aria-hidden="true">
+<use href="#i-next">
+</use>
+</svg>
+<span>The Brain Atlas</span>
+</div>
+<div class="page-intro">
+<div class="eyebrow">
+<i>
+</i>Anatomy · interactive atlas</div>
+<h1>The Brain Atlas</h1>
+<p>Select a marker to explore a region of the brain. Each plays a part in a wider network.</p>
+</div>
+<div class="experience">
+<figure class="large-plate atlas-plate">
+<div class="atlas-frame">
+<img src="hero-brain.webp" alt="Side view of a human brain, with the front on the left.">
+<div id="brainPins">
+</div>
+</div>
+<figcaption>Lateral view · schematic landmarks</figcaption>
+</figure>
+<div class="side-control">
+<div class="micro">Region guide</div>
+<h2 id="regionTitle">Frontal lobe</h2>
+<p id="regionText" aria-live="polite">
+</p>
+<div class="region-list" id="regionButtons">
+</div>
+</div>
+</div>
+<div class="reading-note">
+<h2>Look beneath the surface</h2>
+<div class="inset">
+<img src="coronal.webp" alt="Illustrated coronal slice of the brain">
+<p>A coronal section cuts across the brain from side to side. This view reveals the paired hemispheres and the fluid-filled spaces inside them. The surface folds allow more cortex to fit inside the skull.</p>
+</div>
+<a href="https://my.clevelandclinic.org/health/body/22638-brain">Read the Cleveland Clinic brain guide</a>
+</div>
+</section>
+<section class="view subpage" id="signals" hidden>
+<div class="crumb">
+<a href="#collection">Exhibits</a>
+<svg class="icon" aria-hidden="true">
+<use href="#i-next">
+</use>
+</svg>
+<span>The Signal Lab</span>
+</div>
+<div class="page-intro">
+<div class="eyebrow">
+<i>
+</i>Cellular science · signal simulator</div>
+<h1>The Signal Lab</h1>
+<p>Move the slider from inhibition toward excitation. Watch the voltage trace and see when a signal travels down the axon.</p>
+</div>
+<div class="signal-workbench">
+<figure class="signal-specimen"><div class="micro">Club specimen · multipolar neuron</div>
+<svg id="neuronFigure" viewBox="0 0 750 500" role="img" aria-label="Club illustration of a neuron at rest">
+<image href="neuron.webp" width="750" height="500"/>
+<circle id="somaResponse" cx="185" cy="232" r="39" fill="#972ac6" opacity="0"/>
+<path id="axonRoute" d="M247 244 Q290 265 359 266 Q409 267 453 253 Q508 232 552 232 Q587 227 614 240 Q638 256 661 250 Q703 247 735 238" fill="none" stroke="#66269d" stroke-width="5" stroke-linecap="round" opacity="0"/>
+<g id="axonImpulse" visibility="hidden"><circle r="15" fill="#9045da" opacity=".28"/><circle r="7" fill="#fff2a8" stroke="#572277" stroke-width="3"/></g>
+</svg><figcaption id="axonCaption">At rest · no traveling impulse</figcaption></figure>
+<div class="signal-controls"><h2>Balance the input</h2>
+<p id="sliderHelp">Start at rest. Slide right to <strong>+15 mV</strong> to fire the neuron, then slide left to see inhibition.</p>
+<div class="slider-heading"><label for="stimulus">Net input</label><output for="stimulus" id="inputValue">0 mV</output></div>
+<div class="slider-track"><input type="range" id="stimulus" min="-10" max="25" step="1" value="0" aria-describedby="sliderHelp"><i class="threshold-tick" aria-hidden="true"></i></div>
+<div class="slider-ends"><span>Inhibition</span><span>Excitation</span></div>
+<div class="signal-result" aria-live="polite" aria-atomic="true"><strong id="neuronState">At rest</strong><p id="responseText"></p></div>
+<div class="action-row"><button type="button" class="text-button" id="replaySignal">Replay response</button><button type="button" class="reset-link" id="neuronReset">Reset</button></div></div>
+<figure class="trace-panel"><div class="trace-header"><div><div class="micro">Voltage trace</div><h2>Membrane potential</h2></div><div class="trace-key"><i></i>Response <i></i>Threshold −55 mV</div></div>
+<svg id="traceGraph" viewBox="0 0 700 165" role="img" aria-labelledby="graphTitle graphDesc"><title id="graphTitle">Membrane voltage over time</title><desc id="graphDesc"></desc><g id="graphGrid"></g><path id="voltageTrace" fill="none" stroke="#7b46b2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><line id="graphCursor" y1="14" y2="126" stroke="#a989b9" stroke-dasharray="2 4" visibility="hidden"/><circle id="graphPoint" r="4.3" fill="#6d359d" stroke="#fff" stroke-width="1.6" visibility="hidden"/></svg>
+<figcaption id="traceCaption"></figcaption></figure></div>
+<div class="reading-note">
+<h2>Reading the response</h2>
+<p>Excitation makes the membrane voltage less negative. In this example, a 15 mV rise takes the neuron from −70 mV to its −55 mV firing threshold. Once triggered, the spike rises to about +30 mV, falls briefly below rest, and recovers. A stronger input reaches threshold sooner while the spike keeps its height.</p>
+<p class="fine">The trace shows one illustrative response at the start of the axon. Playback is slowed so you can follow the impulse along the cell.</p>
+<a href="https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential">OpenStax · The action potential</a>
+</div>
+</section>
+<section class="view subpage" id="conditions" hidden>
+<div class="crumb">
+<a href="#collection">Exhibits</a>
+<svg class="icon" aria-hidden="true">
+<use href="#i-next">
+</use>
+</svg>
+<span>Understanding Conditions</span>
+</div>
+<div class="page-intro">
+<div class="eyebrow">
+<i>
+</i>Neurological health · field guide</div>
+<h1>Understanding Conditions</h1>
+<p>Learn what each condition can look like, how experiences differ, and how to support someone.</p>
+</div>
+<div class="tablist" id="conditionTabs">
+<button data-condition="epilepsy" aria-pressed="true">Epilepsy</button>
+<button data-condition="adhd" aria-pressed="false">ADHD</button>
+<button data-condition="stroke" aria-pressed="false">Stroke</button>
+</div>
+<div class="lesson" id="conditionLesson" aria-live="polite">
+</div>
+</section>
+<section class="view subpage" id="lab" hidden>
+<div class="crumb">
+<a href="#collection">Exhibits</a>
+<svg class="icon" aria-hidden="true">
+<use href="#i-next">
+</use>
+</svg>
+<span>Interactive lab</span>
+</div>
+<div class="page-intro">
+<div class="eyebrow">
+<i>
+</i>Hands-on learning</div>
+<h1>The interactive lab</h1>
+<p>Choose an experiment. Change one thing, observe what happens, and try again at your own pace.</p>
+</div>
+<div class="lab-grid">
+<a class="lab-link" href="#signals">
+<span class="lab-icon">
+<svg class="icon" aria-hidden="true">
+<use href="#i-pulse">
+</use>
+</svg>
+</span>
+<div>
+<h2>The Signal Lab</h2>
+<p>Combine excitation and inhibition to explore firing thresholds.</p>
+</div>
+</a>
+<a class="lab-link" href="#network">
+<span class="lab-icon">
+<svg class="icon" aria-hidden="true">
+<use href="#i-nodes">
+</use>
+</svg>
+</span>
+<div>
+<h2>Network & Rescue</h2>
+<p>Compare neural activity, then practice seizure first aid.</p>
+</div>
+</a>
+<a class="lab-link" href="#brainshift">
+<span class="lab-icon">
+<svg class="icon" aria-hidden="true">
+<use href="#i-game">
+</use>
+</svg>
+</span>
+<div>
+<h2>BrainShift</h2>
+<p>Practice switching rules across twelve original creatures.</p>
+</div>
+</a>
+<a class="lab-link" href="#flow">
+<span class="lab-icon">
+<svg class="icon" aria-hidden="true">
+<use href="#i-heart">
+</use>
+</svg>
+</span>
+<div>
+<h2>BrainFlow</h2>
+<p>Change blood flow and learn the six B.E. F.A.S.T. warning signs.</p>
+</div>
+</a>
+</div>
+</section>
+<section class="view subpage" id="network" hidden>
+<div class="crumb">
+<a href="#lab">Interactive lab</a>
+<svg class="icon" aria-hidden="true">
+<use href="#i-next">
+</use>
+</svg>
+<span>Network & Rescue</span>
+</div>
+<div class="page-intro">
+<div class="eyebrow">
+<i>
+</i>Neural networks · first aid</div>
+<h1>Network & Rescue</h1>
+<p>Compare two snapshots of activity, then practice three decisions you might face during a seizure.</p>
+</div>
+<div class="experience">
+<figure class="large-plate">
+<canvas id="networkDiagram" width="760" height="420" role="img" aria-label="A network with a subset of nodes active">
+</canvas>
+<figcaption>Illustrative activity snapshot</figcaption>
+</figure>
+<div class="side-control">
+<div class="micro">Network explorer</div>
+<h2>Patterns of activity</h2>
+<div class="tablist">
+<button data-sync="0" aria-pressed="true">Varied</button>
+<button data-sync="1" aria-pressed="false">Synchronized</button>
+</div>
+<p id="netDesc" aria-live="polite">
+</p>
+<p class="fine">Neurons can synchronize during ordinary brain activity. This snapshot illustrates timing only.</p>
+</div>
+</div>
+<div class="lesson-grid">
+<section class="panel">
+<div class="micro" id="aidCount">
+</div>
+<h2 id="aidQuestion">
+</h2>
+<div class="control-stack" id="aidAnswers">
+</div>
+<p id="aidFeedback" aria-live="polite">
+</p>
+<button class="button" id="aidNext" disabled>Next question</button>
+</section>
+<aside class="guidance">
+<h3>Seizure first aid</h3>
+<p>Stay nearby, time the seizure, and clear objects that could cause injury. If the person is lying down, gently roll them onto their side, mouth toward the ground. Keep their mouth clear and let them move freely.</p>
+<p>In the U.S., call <strong>911</strong> if a seizure lasts more than five minutes, another follows soon, the person is injured, or breathing or waking is difficult afterward. Also call for a seizure in water, a first seizure, pregnancy, or diabetes with loss of consciousness.</p>
+<a class="source" href="https://www.cdc.gov/epilepsy/first-aid-for-seizures/index.html">CDC · First aid for seizures</a>
+</aside>
+</div>
+</section>
+<section class="view subpage" id="brainshift" hidden>
+<div class="crumb">
+<a href="#lab">Interactive lab</a>
+<svg class="icon" aria-hidden="true">
+<use href="#i-next">
+</use>
+</svg>
+<span>BrainShift</span>
+</div>
+<div class="page-intro">
+<div class="eyebrow">
+<i>
+</i>Cognitive flexibility · learning game</div>
+<h1>BrainShift</h1>
+<p>Study the creature, read the rule, and choose yes or no. Watch for a new rule every three creatures.</p>
+</div>
+<div id="gameBoard" class="experience" tabindex="0">
+<figure class="large-plate game-plate">
+<img id="creatureImage" src="creature.webp" alt="A creature with two wings and no horns">
+<figcaption>Original creature collection</figcaption>
+</figure>
+<div class="side-control">
+<div class="micro" id="gameProgress">
+</div>
+<h2 id="gameRule">
+</h2>
+<p id="gameCue" aria-live="polite">
+</p>
+<div class="answer-row">
+<button class="button" id="gameYes">Yes <kbd>←</kbd>
+</button>
+<button class="button outline" id="gameNo">No <kbd>→</kbd>
+</button>
+</div>
+<div id="gameFeedback" aria-live="polite">
+</div>
+<div class="game-options">
+<label>
+<input type="checkbox" id="supportMode"> Extra rule cues</label>
+<span id="gameScore">
+</span>
+</div>
+<button class="text-button" id="gameReset">Restart game</button>
+</div>
+</div>
+<div class="reading-note">
+<h2>What changed?</h2>
+<p>A creature can have wings, horns, both, or neither. When the question changes, the feature that mattered a moment ago may become irrelevant. This untimed activity explores rule switching. Its score describes this round of play and has no diagnostic meaning.</p>
+<p class="fine">Keyboard play: focus the game, then use the left arrow for yes and the right arrow for no.</p>
+</div>
+</section>
+<section class="view subpage" id="flow" hidden>
+<div class="crumb">
+<a href="#lab">Interactive lab</a>
+<svg class="icon" aria-hidden="true">
+<use href="#i-next">
+</use>
+</svg>
+<span>BrainFlow</span>
+</div>
+<div class="page-intro">
+<div class="eyebrow">
+<i>
+</i>Circulation · warning signs</div>
+<h1>BrainFlow</h1>
+<p>Close one branch and compare what happens downstream in this simplified model of blood flow.</p>
+</div>
+<div class="experience">
+<figure class="large-plate">
+<canvas id="flowDiagram" width="760" height="430" role="img" aria-label="Two open vessel branches">
+</canvas>
+<figcaption>Two-branch circulation model</figcaption>
+</figure>
+<div class="side-control">
+<div class="micro">Blood supply</div>
+<h2 id="flowStatus">Both branches open</h2>
+<p id="flowDesc" aria-live="polite">
+</p>
+<button class="button" id="blockFlow" aria-pressed="false">Block a branch</button>
+<p class="fine">A blockage can cause an ischemic stroke. A hemorrhagic stroke involves bleeding. Real circulation may include alternative routes for blood.</p>
+</div>
+</div>
+<div class="lesson-grid">
+<section class="panel">
+<div class="micro">Stroke recognition</div>
+<h2>Remember B.E. F.A.S.T.</h2>
+<p>Select a letter to explore a warning sign or action.</p>
+<div class="tablist" id="fastButtons">
+</div>
+<h3 id="fastTitle">
+</h3>
+<p id="fastText" aria-live="polite">
+</p>
+</section>
+<aside class="guidance">
+<h3>Suspected stroke is an emergency</h3>
+<p>In the U.S., <strong>call 911 immediately</strong> for even one sudden warning sign, including symptoms that disappear. Note when they began or when the person was last known to be well.</p>
+<a class="source" href="https://www.stroke.org/en/about-stroke/stroke-symptoms">American Stroke Association · Stroke symptoms</a>
+</aside>
+</div>
+</section>
+<section class="view subpage" id="community" hidden>
+<div class="crumb">
+<a href="#collection">Exhibits</a>
+<svg class="icon" aria-hidden="true">
+<use href="#i-next">
+</use>
+</svg>
+<span>The Connected Brain</span>
+</div>
+<div class="page-intro">
+<div class="eyebrow">
+<i>
+</i>Community · participatory artwork</div>
+<h1>The Connected Brain</h1>
+<p>Add a neuron and watch it branch into the brain’s existing network. Each color represents a theme of support.</p>
+</div>
+<div class="experience">
+<figure class="large-plate community-plate">
+<button id="expandBrain" class="expand-brain" type="button" aria-haspopup="dialog">⛶ &nbsp;Expand view</button>
+<canvas id="communityDiagram" width="1152" height="840" role="img" aria-label="A symbolic brain made of connected neurons">
+</canvas>
+<figcaption id="communityCount" aria-live="polite">0 neurons added</figcaption>
+</figure>
+<form class="side-control" id="contribute">
+<h2>Add your neuron</h2>
+<label for="theme">Choose a theme</label>
+<select id="theme">
+<option value="respect">Respect for every brain</option>
+<option value="epilepsy">Epilepsy awareness</option>
+<option value="adhd">ADHD understanding</option>
+<option value="stroke">Stroke support</option>
+</select>
+<label for="message">A kind message <span>(optional)</span>
+</label>
+<textarea id="message" maxlength="100" rows="2" placeholder="A few words of encouragement">
+</textarea>
+<p class="fine">Keep names and medical details private. Your artwork stays in this tab and clears on reload.</p>
+<div class="action-row">
+<button class="button" type="submit" id="addNeuron">Add neuron</button>
+<button class="text-button" type="button" id="clearBrain">Reset artwork</button>
+</div>
+</form>
+</div>
+<div id="messages" class="messages" aria-live="polite">
+</div>
+<dialog id="brainDialog" aria-labelledby="expandedTitle"><div class="zoom-head"><div><div class="micro">Community artwork</div><h2 id="expandedTitle">The Connected Brain</h2></div><button type="button" class="text-button" id="closeBrain" autofocus>Close</button></div>
+<canvas tabindex="0" id="wideBrain" width="1728" height="1260" role="img" aria-label="Expanded view of your connected brain artwork"></canvas>
+<div class="zoom-foot"><span id="wideCount"></span><label for="networkZoom">Zoom</label><input id="networkZoom" type="range" min="1" max="2.5" value="1" step=".25"><output id="zoomValue" for="networkZoom">100%</output></div><p class="zoom-help">When zoomed in, drag the artwork or focus it and use the arrow keys to pan.</p></dialog>
+</section>
+<section class="view subpage" id="studio" hidden>
+<div class="crumb">
+<a href="#collection">Exhibits</a>
+<svg class="icon" aria-hidden="true">
+<use href="#i-next">
+</use>
+</svg>
+<span>Paper Neurons</span>
+</div>
+<div class="page-intro">
+<div class="eyebrow">
+<i>
+</i>Maker studio · printable workshop</div>
+<h1>Paper Neurons</h1>
+<p>Follow a signal from the dendrites to the axon terminals, then turn the diagram into your own piece of science art.</p>
+</div>
+<div class="experience">
+<figure class="large-plate studio-plate">
+<div class="sheet-mini">
+<span>NEUROSCOPE &nbsp; / &nbsp; MAKER STUDIO</span>
+<h2>Make a neuron</h2>
+<canvas class="craft-preview" width="640" height="290" role="img" aria-label="Printable neuron outline">
+</canvas>
+<div class="tag-mini">A message of kindness</div>
+</div>
+<figcaption>One-page worksheet · A4 or US Letter</figcaption>
+</figure>
+<div class="side-control">
+<div class="micro">Paper workshop</div>
+<h2>Make a neuron</h2>
+<p>Gather paper, colored pencils, scissors, and tape. Ask an adult for help with cutting.</p>
+<ol>
+<li>Color the branching dendrites, cell body, axon, and terminals.</li>
+<li>Trace the route a signal takes through the cell.</li>
+<li>Cut around the outline. Write on the message tag and tape it beside your neuron.</li>
+</ol>
+<button class="button" id="printBtn">
+<svg class="icon" aria-hidden="true">
+<use href="#i-print">
+</use>
+</svg>Print worksheet</button>
+<p class="fine">Starter template for classroom or home testing.</p>
+</div>
+</div>
+</section>
+<section class="view subpage" id="about" hidden>
+<div class="crumb">
+<a href="#collection">Exhibits</a>
+<svg class="icon" aria-hidden="true">
+<use href="#i-next">
+</use>
+</svg>
+<span>About the museum</span>
+</div>
+<div class="page-intro">
+<div class="eyebrow">
+<i>
+</i>Student-led neuroscience education</div>
+<h1>About NeuroScope</h1>
+<p>A digital museum for anyone curious about the nervous system and the people whose lives it shapes.</p>
+</div>
+<div class="lesson-grid">
+<section class="panel">
+<h2>Science you can explore</h2>
+<p>NeuroScope brings science, creativity, and compassion into one learning space. Choose a brain region, combine neural signals, or add a neuron to a piece of art.</p>
+<p>The exhibits use simplified models and original illustrations. They support learning and conversation. Health information is general education. Individual medical concerns belong with a qualified healthcare professional.</p>
+<a class="button " href="#collection">
+<svg class="icon" aria-hidden="true">
+<use href="#i-grid">
+</use>
+</svg>Explore exhibits</a>
+</section>
+<section class="panel sources">
+<h2>Museum reading shelf</h2>
+<a class="source" href="https://www.nichd.nih.gov/health/topics/neuro/conditioninfo/Pages/parts.aspx">NIH · The nervous system</a>
+<a class="source" href="https://my.clevelandclinic.org/health/body/22638-brain">Cleveland Clinic · Brain anatomy</a>
+<a class="source" href="https://www.cdc.gov/epilepsy/about/index.html">CDC · About epilepsy</a>
+<a class="source" href="https://www.cdc.gov/epilepsy/first-aid-for-seizures/index.html">CDC · Seizure first aid</a>
+<a class="source" href="https://www.cdc.gov/adhd/about/index.html">CDC · About ADHD</a>
+<a class="source" href="https://www.stroke.org/en/about-stroke/stroke-symptoms">American Stroke Association · Stroke symptoms</a>
+<p class="fine">Sources checked November 25, 2026. Independent clinical review is pending.</p>
+</section>
+</div>
+</section>
+</main>
+<footer>
+<div>
+<a class="brand" href="#home" aria-label="NeuroScope home">
+<span class="brand-mark">
+<svg class="icon" aria-hidden="true">
+<use href="#i-brain">
+</use>
+</svg>
+</span>NeuroScope</a>
+<p>Every neuron matters. Every person matters.</p>
+</div>
+<a href="#about">About &amp; sources</a>
+</footer>
+<article id="printSheet">
+<div class="micro">NeuroScope / Maker Studio</div>
+<h1>Make a neuron</h1>
+<p>Use colored pencils to color the cell, then trace the route of a signal. Cut around its outer line with an adult's help. Write a message on the tag and tape it next to your neuron.</p>
+<canvas id="printNeuron" width="1380" height="630" role="img" aria-label="Labeled paper neuron to color and cut">
+</canvas>
+<div class="message-tag">
+<strong>A message of kindness</strong>
+<p>Every neuron matters. Every person matters.</p>
+<div>
+</div>
+</div>
+<p class="fine">A simplified drawing of one type of neuron. Dendrites receive signals. An action potential travels along the axon toward its terminals.</p>
+</article>
+</body>
+</html>
